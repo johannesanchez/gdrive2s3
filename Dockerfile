@@ -4,10 +4,9 @@ FROM ubuntu:20.10
 # ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y
 # RUN apt-get clean
-# && apt upgrade -y
-# RUN apt-get install -y build-essential 
-# libfuse-dev libcurl4-openssl-dev 
-# libxml2-dev pkg-config libssl-dev mime-support automake libtool wget tar git unzip
+# RUN apt-get install -y build-essential libfuse-dev \
+#     libcurl4-openssl-dev libxml2-dev pkg-config libssl-dev\
+#     mime-support automake libtool wget tar git unzip
 # RUN apt-get install lsb-release -y  && apt-get install zip -y && apt-get install vim -y
 
 # ## Install AWS CLI
@@ -29,9 +28,11 @@ RUN apt-get update -y
 # WORKDIR /usr/src/s3fs-fuse 
 # RUN ./autogen.sh && ./configure && make && make install
 
-# ## Create folder
+## Create folder
+RUN mkdir /var/www
 # WORKDIR /var/www
-# RUN mkdir s3
+RUN cd /var/www
+RUN mkdir s3
 
 # ## Set Your AWS Access credentials
 # ENV AWS_ACCESS_KEY=
