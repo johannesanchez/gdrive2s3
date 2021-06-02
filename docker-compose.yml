@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+    rclone:
+        container_name: rclone
+        image: rclone/rclone:1.54
+        volumes:
+            - ./data:/data:shared
+            - ./config/rclone:/config/rclone
+            - /etc/passwd:/etc/passwd:ro
+            - /etc/group:/etc/group:ro
+        devices:
+            - /dev/fuse
+        cap_add:
+            - SYS_ADMIN
+        security_opt: 
+            - apparmor:unconfined
+        command: "mount Gdrive: /data/mount"
+        restart: always
